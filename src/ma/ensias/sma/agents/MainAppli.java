@@ -1,8 +1,5 @@
 package ma.ensias.sma.agents;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
@@ -11,6 +8,8 @@ import ma.ensias.agents.env.MainContainer;
 
 public class MainAppli {
 	ContainerController mainContainer, container;
+	private AgentController producerAgent;
+	
 	
 	public static void main(String[] args) throws StaleProxyException {
 		new MainAppli();
@@ -19,5 +18,7 @@ public class MainAppli {
 	public MainAppli() throws StaleProxyException {
 		mainContainer = new MainContainer().getContainer();
 		container = new JadeContainer().getContainer();
+		producerAgent = container
+				.createNewAgent("Producteur", "ma.ensias.agents.Producer", null);
 	}
 }
