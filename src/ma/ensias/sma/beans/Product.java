@@ -7,26 +7,25 @@ public class Product {
 	private double unitCost;
 	
 	public Product(String productName, Double unitPrice, Double unitCost) {
-		// TODO Auto-generated constructor stub
+		this.name = productName;
+		this.unitPrice = unitPrice;
+		this.unitCost = unitCost;
 	}
+	
 	public String getName() {
 		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public double getUnitPrice() {
 		return unitPrice;
 	}
-	public void setUnitPrice(double price) {
-		this.unitPrice = price;
-	}
 
 	public double getUnitCost() {
 		return unitCost;
-	}
-	public void setUnitCost(double unitCost) {
-		this.unitCost = unitCost;
 	}	
+	
+	@Override
+	public String toString() {
+		return "ProductName="+name+", UP="+unitPrice+", UC="+unitCost;
+	}
 }

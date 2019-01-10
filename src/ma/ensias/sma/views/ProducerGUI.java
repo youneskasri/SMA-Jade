@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import jade.wrapper.StaleProxyException;
 import ma.ensias.sma.agents.Producer;
 import ma.ensias.sma.beans.Product;
 
@@ -157,16 +158,26 @@ public class ProducerGUI {
 	private void advertiseProductHandler() {
 		System.out.println("Advertising the Product ...");
 		String productName = nameField.getText();
-		Double unitPrice = Double.parseDouble(unitPriceField.getText());
-		Double unitCost = Double.parseDouble(unitCostField.getText());
-		Product product = new Product(productName, unitPrice, unitCost);
-		producer.advertiseProduct(product);
+		try {
+			Double unitPrice = Double.parseDouble(unitPriceField.getText());
+			Double unitCost = Double.parseDouble(unitCostField.getText());
+			Product product = new Product(productName, unitPrice, unitCost);
+			producer.advertiseProduct(product);	
+		} catch (NumberFormatException e) {
+			System.out.println("NumberFormatException ...");
+		}
+
 	}
 
 	private void createConsumerHandler() {
 		System.out.println("Creating the Consumer ...");
-		int newNumberOfCustomers = producer.createConsumer();
-		numberOfCustomersField.setText(Integer.toString(newNumberOfCustomers));		
+		try {
+			int newNumberOfCustomers = producer.createConsumer();
+			numberOfCustomersField.setText(Integer.toString(newNumberOfCustomers));		
+		} catch (StaleProxyException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 

@@ -19,6 +19,6 @@ public class MainAppli {
 		mainContainer = new MainContainer().getContainer();
 		container = new JadeContainer().getContainer();
 		producerAgent = container
-				.createNewAgent("Producteur", "ma.ensias.agents.Producer", null);
+				.createNewAgent("Producteur", Producer.class.getName(), new Object[]{});
 	}
 }
