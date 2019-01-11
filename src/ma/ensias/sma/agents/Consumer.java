@@ -8,12 +8,9 @@ import ma.ensias.sma.services.ConsumerServiceImpl;
 
 public class Consumer extends Agent {
 
-	private ConsumerService consumerService;
-	
 	@Override
 	protected void setup() {
-		consumerService = new ConsumerServiceImpl();
-		
+
 		addBehaviour(new OneShotBehaviour() {			
 			@Override
 			public void action() {

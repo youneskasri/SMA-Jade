@@ -31,29 +31,42 @@ public class ProducerGUI {
 		this.frame.setVisible(b);
 	}
 	
-	/**
-	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProducerGUI2 window = new ProducerGUI2();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
 	/** Create the application. */
 	public ProducerGUI(Producer producer) {
 		initialize();
 		this.producer = producer;
 	}
 
+	public void updateProductReport(int totalQuantitySold, double amountOfProfit) {
+		totalQuantitySoldField.setText(Integer.toString(totalQuantitySold));
+		amountOfProfitField.setText(Double.toString(amountOfProfit));
+	
+	}
 
+	private void advertiseProductHandler() {
+		System.out.println("Advertising the Product ...");
+		String productName = nameField.getText();
+		try {
+			Double unitPrice = Double.parseDouble(unitPriceField.getText());
+			Double unitCost = Double.parseDouble(unitCostField.getText());
+			Product product = new Product(productName, unitPrice, unitCost);
+			producer.advertiseProduct(product);	
+		} catch (NumberFormatException e) {
+			System.out.println("NumberFormatException ...");
+		}
+
+	}
+
+	private void createConsumerHandler() {
+		System.out.println("Creating the Consumer ...");
+		try {
+			int newNumberOfCustomers = producer.createConsumer();
+			numberOfCustomersField.setText(Integer.toString(newNumberOfCustomers));		
+		} catch (StaleProxyException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	/** Initialize the contents of the frame. */
 	private void initialize() {
@@ -153,33 +166,6 @@ public class ProducerGUI {
 		label.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		topPanel.add(label);
 	}
-
-
-	private void advertiseProductHandler() {
-		System.out.println("Advertising the Product ...");
-		String productName = nameField.getText();
-		try {
-			Double unitPrice = Double.parseDouble(unitPriceField.getText());
-			Double unitCost = Double.parseDouble(unitCostField.getText());
-			Product product = new Product(productName, unitPrice, unitCost);
-			producer.advertiseProduct(product);	
-		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException ...");
-		}
-
-	}
-
-	private void createConsumerHandler() {
-		System.out.println("Creating the Consumer ...");
-		try {
-			int newNumberOfCustomers = producer.createConsumer();
-			numberOfCustomersField.setText(Integer.toString(newNumberOfCustomers));		
-		} catch (StaleProxyException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
 
 }
 

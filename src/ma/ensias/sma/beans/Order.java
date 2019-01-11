@@ -6,9 +6,9 @@ public class Order implements Serializable {
 
 	private Product product;
 	/** Le prix maximum que le consommateur est prêt à payer */
-	private double pmax;
+	public double pmax;
 	/** La valeur de la "gourmandise" */
-	private double qmax;
+	public double qmax;
 	
 	public Order(Product product, double pmax, double qmax) {
 		this.product = product;
@@ -18,5 +18,9 @@ public class Order implements Serializable {
 	
 	public String toString() {
 		return "Pmax="+pmax+", Qmax="+qmax;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;		
 	}
 }

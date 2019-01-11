@@ -20,7 +20,6 @@ public class AdvertiseProductBehavior extends OneShotBehaviour {
 		ACLMessage message = new ACLMessage(ACLMessage.INFORM);
 		consumers.forEach(consumer ->  message.addReceiver(new AID(consumer, AID.ISLOCALNAME)));
 		try { message.setContentObject(product); } catch (IOException ex) {	ex.printStackTrace(); }
-		//message.setContent("TEST: <ProductName, Price>");
 		message.setOntology("commerce");
 		myAgent.send(message);	
 		System.out.println("Sent INFORM message to show my New Product");

@@ -16,13 +16,7 @@ public class ReceiveAndOrderProductsBehavior extends CyclicBehaviour {
 		if (message != null) {
 			System.out.println("Received an INFORM message");
 			Order order = generateOrderForTheProduct(message);	
-			//System.out.println("TEST: Received = "+message.getContent());
-			if (order != null) sendOrder(message, order, ACLMessage.REQUEST);
-			/*ACLMessage reply = message.createReply();
-			reply.setPerformative(ACLMessage.REQUEST);
-			reply.setContent("TEST REPLIED WITH ORDER"); 
-			myAgent.send(reply); */
-			
+			if (order != null) sendOrder(message, order, ACLMessage.REQUEST);			
 		} else {
 			block();
 		}
@@ -41,7 +35,7 @@ public class ReceiveAndOrderProductsBehavior extends CyclicBehaviour {
 		try { 
 			Product product = (Product) message.getContentObject();
 			System.out.println("message content (product): " + product);
-			double pmax = 1200, qmax = 2400;
+			double pmax = 120, qmax = 24;
 			return new Order(product, pmax, qmax);
 		} catch(Exception e) {
 			e.printStackTrace();
