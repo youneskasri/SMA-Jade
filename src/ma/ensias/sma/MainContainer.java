@@ -1,4 +1,4 @@
-package ma.ensias.agents.env;
+package ma.ensias.sma;
 
 import jade.core.ProfileImpl;
 import jade.core.Runtime;

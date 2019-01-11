@@ -15,7 +15,8 @@ public class ReceiveOrdersBehavior extends CyclicBehaviour {
 				Order order = (Order)message.getContentObject(); 
 				System.out.println("Réception de la commande :" + order.toString());
 				Producer producer = (Producer)myAgent;
-				producer.saveAnOrder(order);
+				String consumerName = message.getSender().getName();
+				producer.saveOrderIfBuyerCanAfford(order, consumerName);
 			} else {
 				block();
 			}			

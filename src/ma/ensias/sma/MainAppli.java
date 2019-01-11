@@ -1,10 +1,9 @@
-package ma.ensias.sma.agents;
+package ma.ensias.sma;
 
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
-import ma.ensias.agents.env.JadeContainer;
-import ma.ensias.agents.env.MainContainer;
+import ma.ensias.sma.agents.Producer;
 
 public class MainAppli {
 	ContainerController mainContainer, container;

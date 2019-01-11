@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -31,6 +32,14 @@ public class ProducerGUI {
 		this.frame.setVisible(b);
 	}
 	
+	public void showAlert(String message) {
+		JOptionPane.showMessageDialog(this.frame, message);
+	}
+	
+	public void showErrorAlert(String message) {
+		JOptionPane.showMessageDialog(this.frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
 	/** Create the application. */
 	public ProducerGUI(Producer producer) {
 		initialize();
@@ -52,7 +61,7 @@ public class ProducerGUI {
 			Product product = new Product(productName, unitPrice, unitCost);
 			producer.advertiseProduct(product);	
 		} catch (NumberFormatException e) {
-			System.out.println("NumberFormatException ...");
+			showErrorAlert("The price must be a number !");
 		}
 
 	}
@@ -63,9 +72,9 @@ public class ProducerGUI {
 			int newNumberOfCustomers = producer.createConsumer();
 			numberOfCustomersField.setText(Integer.toString(newNumberOfCustomers));		
 		} catch (StaleProxyException e) {
+			showErrorAlert("Stale Proxy Exception");
 			e.printStackTrace();
 		}
-		
 	}
 
 	/** Initialize the contents of the frame. */

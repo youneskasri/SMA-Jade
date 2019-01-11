@@ -1,8 +1,7 @@
-package ma.ensias.agents.env;
-
+package ma.ensias.sma;
 import jade.core.ProfileImpl;
-import jade.wrapper.ContainerController;
 import jade.core.Runtime;
+import jade.wrapper.ContainerController;
 
 public class JadeContainer {
 

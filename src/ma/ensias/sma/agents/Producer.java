@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.wrapper.AgentController;
@@ -19,11 +21,14 @@ import ma.ensias.sma.views.ProducerGUI;
  * The Producer Agent offers a GUI
  * Is responsible for creating Consumer agents
  */
-public class Producer extends Agent {
+public class Producer extends Agent implements IProducer {
 		
 	private ProducerGUI window;
-	private Product product;
 	private List<String> consumersNames = new ArrayList<>();
+	
+	/** Our latest product */
+	private Product product;
+	/** Remise à 0 for each new product */
 	private List<Order> orders = new ArrayList<>();
 	
 	public Product getProduct() {
@@ -37,10 +42,6 @@ public class Producer extends Agent {
 	protected void setup() {
 		addBehaviours();
 		showGUI();
-	}
-	
-	public static void main(String[] args) {
-		// new Producer().setup(); // For Tests
 	}
 	
 	private void addBehaviours() {
@@ -69,8 +70,9 @@ public class Producer extends Agent {
 		});
 	}
 
-
 	public void advertiseProduct(Product product) {
+		this.product = product;
+		this.orders.clear();
 		System.out.println("Advertising " + product.toString() + "...");
 		addBehaviour(new AdvertiseProductBehavior());
 	}
@@ -90,18 +92,30 @@ public class Producer extends Agent {
 		return numberOfConsumers;
 	}
 	
-	public void saveAnOrder(Order order) {
+	public void saveOrderIfBuyerCanAfford(Order order, String consumerName) {
 		order.setProduct(product);
+		if (order.getQuantity() < 1) {
+			window.showAlert(consumerName+" don't want this product");
+			return;
+		}
 		orders.add(order);
-		
+		window.showAlert(consumerName+" wants "+order.getQuantity()+" of "+product.getName());
+		updateSellingReport();
+	}
+	
+
+	/** QTE & BENEFICE = QTE*(PU-CU) for all Selling, then Update KPIs */
+	private void updateSellingReport() {
 		int totalQuantitySold = 0; 
 		double amountOfProfit = 0;
 		
 		for(Order o : orders) {
-			totalQuantitySold += o.qmax;
-			amountOfProfit += o.pmax * o.qmax;
+			Product soldProduct = o.getProduct();
+			totalQuantitySold += o.getQuantity();			
+			amountOfProfit += o.getQuantity() * (soldProduct.getUnitPrice() - soldProduct.getUnitCost());
 		}
 		
 		window.updateProductReport(totalQuantitySold, amountOfProfit);
 	}
+
 }
