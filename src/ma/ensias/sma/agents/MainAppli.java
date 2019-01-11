@@ -20,5 +20,9 @@ public class MainAppli {
 		container = new JadeContainer().getContainer();
 		producerAgent = container
 				.createNewAgent("Producteur", Producer.class.getName(), new Object[]{});
+		
+		producerAgent.start();
+		
+		System.out.println("Created Producer : " + Producer.class.getName());
 	}
 }

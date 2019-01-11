@@ -6,10 +6,12 @@ import java.util.List;
 
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
+import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
-import ma.ensias.agents.env.JadeContainer;
 import ma.ensias.sma.beans.Product;
+import ma.ensias.sma.behaviors.AdvertiseProductBehavior;
+import ma.ensias.sma.behaviors.ReceiveOrdersBehavior;
 import ma.ensias.sma.services.ProducerService;
 import ma.ensias.sma.services.ProducerServiceImpl;
 import ma.ensias.sma.views.ProducerGUI;
@@ -23,7 +25,15 @@ public class Producer extends Agent {
 	private ProducerGUI window;
 	private ProducerService producerService;
 	private List<String> consumersNames;
-
+	private Product product;
+	
+	public Product getProduct() {
+		return product;
+	}
+	public List<String> getConsumersNames() {
+		return consumersNames;
+	}
+	
 	@Override
 	protected void setup() {
 		initDependencies();
@@ -31,13 +41,8 @@ public class Producer extends Agent {
 		showGUI();
 	}
 	
-	private void after() {
-		// TODO Auto-generated method stub
-
-	}
-	
 	public static void main(String[] args) {
-		new Producer().setup(); // For Tests
+		// new Producer().setup(); // For Tests
 	}
 	
 	private void initDependencies() {
@@ -52,7 +57,11 @@ public class Producer extends Agent {
 			public void action() {
 				System.out.println("Producer Agent Created !!");
 			}
-		});
+		});	
+		/* The Behavior to Send the Product is added 
+		 * Dynamiccaly via the GUI 
+		 * */
+		addBehaviour(new ReceiveOrdersBehavior());
 	}
 	
 	private void showGUI() {
@@ -70,15 +79,18 @@ public class Producer extends Agent {
 
 
 	public void advertiseProduct(Product product) {
-		System.out.println(product.toString());
+		System.out.println("Advertising " + product.toString() + "...");
+		addBehaviour(new AdvertiseProductBehavior());
 	}
 
 	public int createConsumer() throws StaleProxyException {
 		int numberOfConsumers = consumersNames.size() + 1;
-		String consumerName = "Consommateur " + numberOfConsumers;
-		ContainerController container = new JadeContainer().getContainer(); // this.getContainerController();
+		String consumerName = "Consommateur" + numberOfConsumers;
+		ContainerController container = this.getContainerController();
 		if (container != null) {			
-			container.createNewAgent(consumerName, Consumer.class.getName(), new Object[]{});
+			AgentController consumer = container.createNewAgent(consumerName, 
+					Consumer.class.getName(), new Object[]{});
+			consumer.start();
 		} else {
 			System.out.println("getContainerController() returns NULL !!");
 		}
