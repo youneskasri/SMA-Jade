@@ -2,7 +2,9 @@
 ---------------------------------------------
 Réalisé par :
 
-	Younes KASRI, Badr Eddine BAHOUM, 3ème année Génie Logiciel, ENSIAS Promo 2019
+	Younes KASRI, Badr Eddine BAHOUM, 
+	3ème année Génie Logiciel, 
+	ENSIAS Promo 2019
 
 A l'intention de :
 
@@ -86,8 +88,13 @@ le prix et nom du produit, et de recevoir la commande de chaque consommateur. Po
 ## Architecture applicative
 TODO...
 
-## La fonction de planification de la demande
-TODO...
+## Simultation de la demande
+La consommateur détermine la quantitée à calculer à l'aide d'une fonction linéaire `q = m*p`
+où la pente `m = -Qmax/Pmax`
+C'est à l'Agent Consommateur de déterminer Qmax et Pmax :
+
+- **Qmax :** La valeur de la gourmandise est calculée selon la règle suivante : Le consommateur se permet se permet d'utiliser son budget jusqu'à une valeur `MAX_BUDGET`. Qmax est alors calculée selon la relation suivante : `MAX_BUDGET*(1-RAND)/PrixProduit` avec `RAND` une variable aléatoire suivant une Loi Normale Réduite centrée sur 1/2 çàd que la valeur de la variable est `comprise entre 0 et 1`  
+- **Pmax :** Le prix maximum que le consommateur est prêt à payer est calculé selon la règle : `prixProduit*(1+augmentation)` avec augmentation un nombre aléatoire `entre 0 et 50%`
  
 
 # Implémentation de la solution
