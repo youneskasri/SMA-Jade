@@ -1,3 +1,17 @@
+#Projet Systèmes Multi-Agents, Agents Mobiles :
+---------------------------------------------
+Réalisé par :
+
+	Younes KASRI, Badr Eddine BAHOUM, 3ème année Génie Logiciel, ENSIAS Promo 2019
+
+A l'intention de :
+
+	Prof. A EL FAKER, UM5, ENSIAS
+
+Mot clés :
+
+	Java, JADE, agent, distributed systems	
+
 # Introduction 
 Afin d'appliquer les méthodologies et les notions enseignées dans le cours *Systèmes Multi-Agents, Agents Mobiles*, lors de notre 3ème année Génie Logiciel à l'ENSIAS, nous avons été chargé de réaliser une application de simulation Offre/Demande à l'aide du Framework Jade.
 
@@ -102,14 +116,17 @@ TODO...
 ## Supervision de l'execution à l'aide de Jade GUI
 ### Jade Remote Agent Management GUI
 ![alt text][agents]
+
 Nous remarquons que l'Agent Producteur crée les Agents Consommateurs sont crées dans le même conteneur où il réside.
 
 ### Jade Sniffer Agent
 ![alt text][sniffer]
+
 En utilisant l'Agent Sniffer ont remarque que les messages sont échangés conformément à ce qui a été définit.
 
 
 # Conclusion
+Au terme de ce projet, nous sommes parvenus à réaliser un système multi-agents pour une simulation de l'Offre et la Demande. Nous avons effectué le monitoring de ce système à l'aide des outils offerts par Jade. Nous prévoyons d'améliorer notre système en y ajoutant la migration d'agents mobiles, et une simulation plus réaliste du Marché.
 
 
 [description]: DESCRIPTION.png
