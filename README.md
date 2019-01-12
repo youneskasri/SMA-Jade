@@ -69,10 +69,47 @@ le prix et nom du produit, et de recevoir la commande de chaque consommateur. Po
 
 
 # Description de la Solution proposée
+## Architecture applicative
+TODO...
+
+## La fonction de planification de la demande
+TODO...
+ 
+
+# Implémentation de la solution
 ## Structuration du code
 ![alt text][packages]
 ## Les Classes et leurs relations
-A Continuer Diagramme de classe !!
+![alt text][classes]
+
+
+# Résultats d'execution
+## Test de l'execution :
+1. Créer N agents consommateurs en appuyant N fois sur les bouton Create consumer Agent. 
+2. Nous constatons que l'indicateur Number Of Consumers est incrémenté
+2. Renseigner les informations du produit :
+	- Nom du produit
+	- Prix unitaire (de vente)
+	- Coût unitaire (de revient)
+3. Publier le produit chez les consommateurs en appuyant sur le bouton Advertise.
+4. Nous pouvons alors voir les commandes des consommateurs affichées chacune dans un Popup.
+5. Nous pouvons aussi constater que le rapport des ventes est mis à jour :
+	- Quantitée totale vendue (du produit)
+	- Bénéfice = (PU-CU)*Qté
+
+![alt text][execution]
+
+## Supervision de l'execution à l'aide de Jade GUI
+### Jade Remote Agent Management GUI
+![alt text][agents]
+Nous remarquons que l'Agent Producteur crée les Agents Consommateurs sont crées dans le même conteneur où il réside.
+
+### Jade Sniffer Agent
+![alt text][sniffer]
+En utilisant l'Agent Sniffer ont remarque que les messages sont échangés conformément à ce qui a été définit.
+
+
+# Conclusion
 
 
 [description]: DESCRIPTION.png
@@ -81,3 +118,7 @@ A Continuer Diagramme de classe !!
 [behaviours]: DIAG_SEQUENCE.png
 [communication]: DIAG_COMM.png
 [packages]: DIAG_PACKAGE.png
+[classes]: DIAG_CLASS.png
+[execution]: EXECUTION.png
+[agents]: JADE_RMA.png
+[sniffer]: JADE_SNIFFER.png
