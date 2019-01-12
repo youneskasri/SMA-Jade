@@ -86,7 +86,12 @@ le prix et nom du produit, et de recevoir la commande de chaque consommateur. Po
 
 # Description de la Solution proposée
 ## Architecture applicative
-TODO...
+![alt text][architecture]
+
+Une plateforme regroupe un ensemble de conteneurs actifs d'agents.
+Chaque conteneur est en fait une instance de la JRE.
+Le conteneur principal contient des agents spéciaux. Il doit être toujours actif.
+Les conteneurs contiennent des agents qui échangent des messages entre agents locaux, ou avec des agents distant à travers le réseau.
 
 ## Simultation de la demande
 La consommateur détermine la quantitée à calculer à l'aide d'une fonction linéaire `q = m*p`
@@ -141,6 +146,7 @@ Au terme de ce projet, nous sommes parvenus à réaliser un système multi-agent
 [actors]: DIAG_USECASE.png
 [behaviours]: DIAG_SEQUENCE.png
 [communication]: DIAG_COMM.png
+[architecture]: DIAG_DEPLOY.png
 [packages]: DIAG_PACKAGE.png
 [classes]: DIAG_CLASS.png
 [execution]: EXECUTION.png
